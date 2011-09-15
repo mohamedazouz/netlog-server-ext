@@ -41,5 +41,5 @@ function displayFriend($friend) {
 
 $os = new osapiREST($OAUTHKEY, $OAUTHSECRET, $lan, $userid, $dbData, false);
 
-echo  "Done!"
+echo  "Thank You !"
 ?>
