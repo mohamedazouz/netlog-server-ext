@@ -58,7 +58,7 @@ class osapiREST {
             $folder = '/os/tmp/osapi';
             $this->storage = new osapiFileStorage($folder);
         } else {
-            $this->storage = new osapiMySQLStorage($dbData['host'], $dbData['user'], $dbData['pass'], $dbData['db'], $dbData['table']);
+            $this->storage = new osapiMySQLStorage(/*$dbData['host'], $dbData['user'], $dbData['pass'], $dbData['db'], $dbData['table']*/);
         }
 
         $this->auth = osapiOAuth3Legged::performOAuthLogin($this->tokenkey, $this->tokensecret, $this->storage, $this->provider, $this->localUserId, null, $accesstoken);
