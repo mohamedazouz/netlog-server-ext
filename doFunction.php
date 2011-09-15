@@ -32,8 +32,13 @@ switch ($function) {
             $code = 200;
         }break;
     case 4: {  // upload photo
-            $file = $_POST['file'];
+            move_uploaded_file($_FILES['fileToUpload']['tmp_name'],
+                    "uploads/" . $_FILES['fileToUpload']["name"]);
+            echo "<script>console.log('" . $_FILES['fileToUpload']["name"] . "')</script>";
+            $file = "uploads/" . $_FILES['fileToUpload']["name"];
             $result = $os->uploadUserPicture($file);
+            $myFile = $file;
+            unlink($myFile);
             $code = 200;
         }break;
     case 5: { //get user friend details
