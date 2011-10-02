@@ -29,6 +29,9 @@ switch ($function) {
         } break;
     case 3: {  // get user notification
             $result = $os->getViewerFriendsActivities();
+            foreach ($result["friendActivities"]->list as $i) {
+                $i->userId = $os->getFriendDetails($i->userId);
+            }
             $code = 200;
         }break;
     case 4: {  // upload photo
