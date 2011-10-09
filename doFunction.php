@@ -21,6 +21,11 @@ $function = $_POST['function'];
 switch ($function) {
     case 1: {// get user information
             $result = $os->getViewer();
+            foreach ($result["profilevisitors"] as $i->$value) {
+                $visitorid = &$result["profilevisitors"][$i - 1]["visitorid"];
+                $temp = $os->getFriendDetails($visitorid);
+                $visitorid = $temp;
+            }
             $code = 200;
         }break;
     case 2: {// get user friend list

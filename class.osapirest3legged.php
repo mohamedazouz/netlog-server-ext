@@ -89,6 +89,8 @@ class osapiREST {
             'displayName',
             'thumbnailUrl',
             'gender',
+            'profilevisitors',
+            'notifications'
         );
 
         //Fetch the current user.
@@ -106,6 +108,7 @@ class osapiREST {
         $result = get_object_vars($response['self']); //this is an osapiPerson object but we want assoc. array
 
         $this->debug("Viewer result:<pre>" . print_r($result, true) . "</pre>");
+        
         return $result;
     }
 
