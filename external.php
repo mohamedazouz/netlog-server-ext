@@ -41,5 +41,10 @@ function displayFriend($friend) {
 
 $os = new osapiREST($OAUTHKEY, $OAUTHSECRET, $lan, $userid, $dbData, false);
 
-echo  "Thank You !"
 ?>
+<script type = "text/javascript">
+
+        window.open('','_self','');
+        window.close();
+   
+</script>
