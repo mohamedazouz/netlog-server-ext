@@ -8,8 +8,8 @@ require('class.osapirest3legged.php'); //smooths out working with opensocial php
 include 'randomPicFetcher.php'; //for if you do not know what to fill in as pic url to upload
 include 'Header.php';
 
-$key = $_POST['key'];
-$secret = $_POST['secret'];
+$key = "c3dbdee3-f4e5-c7c0-8ce8-eacef9c5fcc0";//$_POST['key'];
+$secret = "3ea5faa7207a6ced5086c3dfcf8c264d";//$_POST['secret'];
 
 $accessToken = new OAuthConsumer($key, $secret);
 $os = new osapiREST($OAUTHKEY, $OAUTHSECRET, $lan, $userid, $dbData, $debug, $accessToken);
@@ -17,14 +17,20 @@ $os = new osapiREST($OAUTHKEY, $OAUTHSECRET, $lan, $userid, $dbData, $debug, $ac
 $code = 200;
 $response = array();
 $result;
-$function = $_POST['function'];
+$function = 1;//$_POST['function'];
 switch ($function) {
     case 1: {// get user information
             $result = $os->getViewer();
-            foreach ($result["profilevisitors"] as $i->$value) {
-                $visitorid = &$result["profilevisitors"][$i - 1]["visitorid"];
+            //echo json_encode($result["profilevisitors"][0]["visitorid"]);
+            //echo $result["profilevisitors"][$i]["visitorid"];
+            /*$visitorid = $result["profilevisitors"][0]["visitorid"];
+             $temp = $os->getFriendDetails($visitorid);
+                $result["profilevisitors"][0]["visitorid"] = $temp;*/
+            $indx=0;
+           foreach ($result["profilevisitors"] as $i) {
+                $visitorid = $result["profilevisitors"][$indx]["visitorid"];
                 $temp = $os->getFriendDetails($visitorid);
-                $visitorid = $temp;
+                $result["profilevisitors"][$indx++]["visitorid"] = $temp;
             }
             $code = 200;
         }break;
