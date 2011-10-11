@@ -10,7 +10,6 @@ include 'Header.php';
 
 $key = $_POST['key'];
 $secret = $_POST['secret'];
-
 $accessToken = new OAuthConsumer($key, $secret);
 $os = new osapiREST($OAUTHKEY, $OAUTHSECRET, $lan, $userid, $dbData, $debug, $accessToken);
 
@@ -23,14 +22,16 @@ switch ($function) {
             $result = $os->getViewer();
             //echo json_encode($result["profilevisitors"][0]["visitorid"]);
             //echo $result["profilevisitors"][$i]["visitorid"];
-            /*$visitorid = $result["profilevisitors"][0]["visitorid"];
-             $temp = $os->getFriendDetails($visitorid);
-                $result["profilevisitors"][0]["visitorid"] = $temp;*/
-            $indx=0;
-           foreach ($result["profilevisitors"] as $i) {
-                $visitorid = $result["profilevisitors"][$indx]["visitorid"];
-                $temp = $os->getFriendDetails($visitorid);
-                $result["profilevisitors"][$indx++]["visitorid"] = $temp;
+            /* $visitorid = $result["profilevisitors"][0]["visitorid"];
+              $temp = $os->getFriendDetails($visitorid);
+              $result["profilevisitors"][0]["visitorid"] = $temp; */
+            if ($result["profilevisitors"]) {
+                $indx = 0;
+                for ($i = 0; $i<sizeof($result["profilevisitors"]); $i++) {
+                    $visitorid = $result["profilevisitors"][$i]["visitorid"];
+                    $temp = $os->getFriendDetails($visitorid);
+                    $result["profilevisitors"][$i]["visitorid"] = $temp;
+                }
             }
             $code = 200;
         }break;
