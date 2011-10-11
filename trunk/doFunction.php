@@ -27,7 +27,7 @@ switch ($function) {
               $result["profilevisitors"][0]["visitorid"] = $temp; */
             if ($result["profilevisitors"]) {
                 $indx = 0;
-                for ($i = 0; $i<sizeof($result["profilevisitors"]); $i++) {
+                for ($i = 0; $i < sizeof($result["profilevisitors"]); $i++) {
                     $visitorid = $result["profilevisitors"][$i]["visitorid"];
                     $temp = $os->getFriendDetails($visitorid);
                     $result["profilevisitors"][$i]["visitorid"] = $temp;
@@ -41,9 +41,17 @@ switch ($function) {
         } break;
     case 3: {  // get user notification
             $result = $os->getViewerFriendsActivities();
-            foreach ($result["friendActivities"]->list as $i) {
-                $i->userId = $os->getFriendDetails($i->userId);
+            if (property_exists($result["friendActivities"],"response")) {
+                $temp=array();
+                $temp['list']=array();
+                $result["friendActivities"]=$temp;
+            } else {
+                foreach ($result["friendActivities"]->list as $i) {
+                    $i->userId = $os->getFriendDetails($i->userId);
+                }
             }
+
+
             $code = 200;
         }break;
     case 4: {  // upload photo
