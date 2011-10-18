@@ -126,7 +126,8 @@ class osapiOAuth3Legged extends osapiOAuth2Legged {
             $this->storage->set($this->storageKey, $this->accessToken);
             return $this->accessToken;
         } else {
-            throw new osapiException("<pre>Error requesting oauth access token, code " . $ret['http_code'] . ", message: " . $ret['data'] . "</pre>");
+            $_SESSION['error']=1;
+            //throw new osapiException("<pre>Error requesting oauth access token, code " . $ret['http_code'] . ", message: " . $ret['data'] . "</pre>");
         }
     }
 

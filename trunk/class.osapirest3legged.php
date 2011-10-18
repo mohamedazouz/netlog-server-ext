@@ -58,7 +58,7 @@ class osapiREST {
             $folder = '/os/tmp/osapi';
             $this->storage = new osapiFileStorage($folder);
         } else {
-            $this->storage = new osapiMySQLStorage(/*$dbData['host'], $dbData['user'], $dbData['pass'], $dbData['db'], $dbData['table']*/);
+            $this->storage = new osapiMySQLStorage(/* $dbData['host'], $dbData['user'], $dbData['pass'], $dbData['db'], $dbData['table'] */);
         }
 
         $this->auth = osapiOAuth3Legged::performOAuthLogin($this->tokenkey, $this->tokensecret, $this->storage, $this->provider, $this->localUserId, null, $accesstoken);
@@ -68,8 +68,10 @@ class osapiREST {
         $this->viewer = $this->getViewer();
         $initText = "Init osapi object 3-legged... Userid " . $this->userId . " - App ID " . $this->appId;
         $storageInfo = $useFileStorage ? "Using file storage in folder $folder" : "Using MySQL storage with host " . $dbData['host'] . " and db " . $dbData['db'];
-        $viewerInfo = "Viewer: " . $this->viewer['nickname'] . " with userid " . $this->viewer['id'];
-        $this->debug($initText . '<br>' . $storageInfo . '<br>' . $viewerInfo);
+        if ($this->viewer['response'] != null) {
+            $viewerInfo = "Viewer: " . $this->viewer['nickname'] . " with userid " . $this->viewer['id'];
+            $this->debug($initText . '<br>' . $storageInfo . '<br>' . $viewerInfo);
+        }
     }
 
     function debug($string) {
@@ -108,7 +110,7 @@ class osapiREST {
         $result = get_object_vars($response['self']); //this is an osapiPerson object but we want assoc. array
 
         $this->debug("Viewer result:<pre>" . print_r($result, true) . "</pre>");
-        
+
         return $result;
     }
 

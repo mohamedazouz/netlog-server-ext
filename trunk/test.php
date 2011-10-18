@@ -24,7 +24,7 @@ $code = 200;
 $response = array();
 $result;
 $functionName;
-for ($i = 1; $i < 2; $i++) {
+for ($i = 1; $i < 7; $i++) {
     switch ($i) {
         case 1: {// get user information
                 $result = $os->getViewer();
