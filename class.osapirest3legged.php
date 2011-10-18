@@ -68,7 +68,9 @@ class osapiREST {
         $this->viewer = $this->getViewer();
         $initText = "Init osapi object 3-legged... Userid " . $this->userId . " - App ID " . $this->appId;
         $storageInfo = $useFileStorage ? "Using file storage in folder $folder" : "Using MySQL storage with host " . $dbData['host'] . " and db " . $dbData['db'];
-        if ($this->viewer['response'] != null) {
+        if (array_key_exists("response", $this->viewer)) {
+            echo "";
+        } else {
             $viewerInfo = "Viewer: " . $this->viewer['nickname'] . " with userid " . $this->viewer['id'];
             $this->debug($initText . '<br>' . $storageInfo . '<br>' . $viewerInfo);
         }
