@@ -40,7 +40,7 @@ function displayFriend($friend) {
 
 
 $os = new osapiREST($OAUTHKEY, $OAUTHSECRET, $lan, $userid, $dbData, false);
-
+if(!isset($_SESSION['error']) || isset($session["token"])){
 ?>
 <script type = "text/javascript">
 
@@ -48,3 +48,10 @@ $os = new osapiREST($OAUTHKEY, $OAUTHSECRET, $lan, $userid, $dbData, false);
         window.close();
    
 </script>
+<?php
+}else{
+    unset($_SESSION['error']);
+    echo "Error Authentication ";
+    echo "<a href='external.php'>Try Again</a>";
+}
+?>
