@@ -26,12 +26,16 @@ switch ($function) {
               $temp = $os->getFriendDetails($visitorid);
               $result["profilevisitors"][0]["visitorid"] = $temp; */
             if ($result["profilevisitors"]) {
-                $indx = 0;
                 for ($i = 0; $i < sizeof($result["profilevisitors"]); $i++) {
                     $visitorid = $result["profilevisitors"][$i]["visitorid"];
                     $temp = $os->getFriendDetails($visitorid);
                     $result["profilevisitors"][$i]["visitorid"] = $temp;
                 }
+            } else {
+                $result["profilevisitors"] = array();
+            }
+            if (!array_key_exists("notifications", $result)) {
+                $result["notifications"] = array();
             }
             $code = 200;
         }break;
@@ -41,10 +45,10 @@ switch ($function) {
         } break;
     case 3: {  // get user notification
             $result = $os->getViewerFriendsActivities();
-            if (property_exists($result["friendActivities"],"response")) {
-                $temp=array();
-                $temp['list']=array();
-                $result["friendActivities"]=$temp;
+            if (property_exists($result["friendActivities"], "response")) {
+                $temp = array();
+                $temp['list'] = array();
+                $result["friendActivities"] = $temp;
             } else {
                 foreach ($result["friendActivities"]->list as $i) {
                     $i->userId = $os->getFriendDetails($i->userId);
