@@ -1,5 +1,4 @@
 <?php
-
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
@@ -25,9 +24,6 @@ require('class.osapirest3legged.php'); //smooths out working with opensocial php
 include 'randomPicFetcher.php'; //for if you do not know what to fill in as pic url to upload
 include 'Header.php';
 
-
-
-
 function printResult($string) {
     debug('<strong>result</strong>: <br /><pre class="result">' . print_r($string, true) . '</pre>');
 }
@@ -38,20 +34,11 @@ function displayFriend($friend) {
     echo '<img class="friendAvatar" src="' . $friend['thumbnailUrl'] . '" />&nbsp;<a target="new" href="' . $friend['profileUrl'] . '">' . $friend['nickname'] . '</a></div>';
 }
 
-
 $os = new osapiREST($OAUTHKEY, $OAUTHSECRET, $lan, $userid, $dbData, false);
-if(!isset($_SESSION['error']) || isset($session["token"])){
 ?>
-    <script type = "text/javascript">
+<script type = "text/javascript">
 
-        window.open('','_self','');
-        window.close();
+    window.open('','_self','');
+    window.close();
 
-    </script>
-<?php
-}else{
-    unset($_SESSION['error']);
-    echo "Error Authentication ";
-    echo "<a href='external.php'>Try Again</a>";
-}
-?>
+</script>
