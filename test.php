@@ -28,10 +28,13 @@ for ($i = 1; $i < 7; $i++) {
     switch ($i) {
         case 1: {// get user information
                 $result = $os->getViewer();
-                for ($i = 0; $i < sizeof($result["profilevisitors"]); $i++) {
-                    $visitorid = $result["profilevisitors"][$i]["visitorid"];
-                    $temp = $os->getFriendDetails($visitorid);
-                    $result["profilevisitors"][$i]["visitorid"] = $temp;
+                if ($result["profilevisitors"]) {
+                    $indx = 0;
+                    for ($i = 0; $i < sizeof($result["profilevisitors"]); $i++) {
+                        $visitorid = $result["profilevisitors"][$i]["visitorid"];
+                        $temp = $os->getFriendDetails($visitorid);
+                        $result["profilevisitors"][$i]["visitorid"] = $temp;
+                    }
                 }
                 $functionName = "getViewer()";
                 $code = 200;
