@@ -20,7 +20,7 @@
  * @author Chris Chabot
  */
 class osapiNetlogProvider extends osapiProvider {
-  public function __construct(osapiHttpProvider $httpProvider = null, $apiDomain = 'http://nl.api.netlog.com') {
+  public function __construct(osapiHttpProvider $httpProvider = null, $apiDomain = 'http://en.api.netlog.com') {
   	//http://en.api.netlog.com
   	//$apiDomain = "http://beta.nl.api.netlog.com"; //"http://nl.api.netlog.com" when we go live!;
     parent::__construct($apiDomain ."/oauth/request_token", $apiDomain . "/oauth/authorize", $apiDomain . "/oauth/access_token",  $apiDomain ."/opensocial/social/rest", $apiDomain . "/opensocial/social/rpc", "Netlog", true, $httpProvider);
